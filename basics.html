@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="basics.js"></script>
+	<script>
+	var anzahlKlicks = 0;
+	window.onload = function(){ // js erst ausführen wenn HTML geladen
+	alert('Hallo Welt');
+	console.log('Hallo Konsole!');
+		document.getElementById('ausgabe').innerHTML = 'HTML mit Javascript';
+		document.getElementById('btn').onclick = function(){
+			anzahlKlicks++;
+			console.log('anzahlKlicks: ',anzahlKlicks);
+			document.getElementById('ausgabe').innerHTML = anzahlKlicks+'mal <b>geklickt</b>';
+			document.getElementById('ausgabe').style.color = 'blue';
+			document.getElementById('ausgabe').style.fontStyle = 'italic';
+
+
+		};
+
+		document.getElementById('red').onclick = function(){
+						document.getElementById('ausgabe').style.color = 'red';
+		};
+
+		document.getElementById('blue').onclick = function(){
+						document.getElementById('ausgabe').style.color = 'blue';
+		};
+};
+	</script>
+	<style>
+p{
+	color:pink;
+}
+
+	</style>
+</head>
+<body>
+	<p>Hello World</p>
+	<p id = "ausgabe"></p>
+	<button id = "btn">klick mich</button>
+
+	<button id = "red">Roter Text</button>
+	<button id = "blue">Blauer Text</button>
+
+</body>
+<script>
+
+</script>
+</html>
