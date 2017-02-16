@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="functions.js"></script>
+	<script>
+	window.onload = function(){
+
+		var zahl, versuche;
+		versuche=0;
+
+
+		zahl=zufallsZahl(1,10);
+		console.log(zahl);
+		//zahl=random
+		//document.getElementById('').onclick = function(e){
+		document.getElementById('formular').onsubmit = function(e){
+			e.preventDefault();
+			zahlVergleichen(zahl,++versuche);
+		}
+
+	};
+
+	var zahlVergleichen = function(z,v){
+		var x;
+
+
+		x=_e('ratezahl').value;
+		if(isNaN(x)){ alert('keine zahl');
+		}else	if(x!=z){
+			if(x<z){
+				document.getElementById('hinweis').innerHTML='die gesuchte zahl ist größer als '+x;
+				//alert('die gesuchte zahl ist größer!');
+
+			}else{
+				document.getElementById('hinweis').innerHTML='die gesuchte zahl ist kleiner als '+x;
+				//alert('die gesuchte zahl ist kleiner!');
+
+			}
+		}else{
+			//alert('Zahl richtig- gewonnen! ;)');
+			document.getElementById('hinweis').innerHTML='Zahl richtig- gewonnen! ;)';
+		}
+
+		console.log('Versuch Nummer '+v);
+
+
+	}
+
+
+
+
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<form id="formular">
+		<input type=text id="ratezahl">
+		<button type=button id="ratebutton">Raten</button>
+	</form>
+	<span id="hinweis">Bitte raten!</span>
+</body>
+</html>

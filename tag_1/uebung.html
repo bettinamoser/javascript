@@ -1,0 +1,79 @@
+<!--
+Übung: 2 Felder, Alter(2-120), Geschlecht(m,w)
+
+Alter: nur ganze Zahlen - sonst Fehlermeldung
+
+Eingabefeld das falsch ist wird rot
+
+Ausgabe: Du bist ein/eine... Mädchen(2-18), Bub(2-18), Frau, Mann
+*/-->
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+	window.onload = function(){
+		document.getElementById('send').onclick=function(e){
+			e.preventDefault(); //Standardfunktionen aus HTML deaktivieren, Achtung Browserkompatibilität, zB Klick am Hyperlink, Formular submit
+
+			//deklaration
+			var age=0, gender='';
+			//initialisierung
+			age=document.getElementById('alter').value*1; //*1 um zu int zu konvertieren oder: /1, -0 oder parseInt-Funktion
+			gender=document.getElementById('geschlecht').value;
+
+			document.getElementById('geschlecht').style.backgroundColor='white';
+			document.getElementById('alter').style.backgroundColor='white';
+
+			if(isFinite(age)&& age==parseInt(age))
+			{
+			if(age >=2 && age <=18){
+
+				if(gender=='m' || gender=='M'){
+						document.getElementById('ausgabe').innerHTML='Du bist ein Bub';
+				}else{
+					if(gender=='w' || gender=='W'){
+						document.getElementById('ausgabe').innerHTML='Du bist ein Mädchen';
+					}else{
+						document.getElementById('geschlecht').style.backgroundColor='red';
+						document.getElementById('ausgabe').innerHTML='Geschlechtsangabe kontrollieren';
+					}
+				}
+				}else{
+					if(age > 18 && age <=120){
+						if(gender=='m' || gender=='M'){
+						document.getElementById('ausgabe').innerHTML='Du bist ein Mann';
+						}else{
+							if(gender=='w' || gender=='W'){
+								document.getElementById('ausgabe').innerHTML='Du bist eine Frau';
+							}else{
+								document.getElementById('geschlecht').style.backgroundColor='red';
+								document.getElementById('ausgabe').innerHTML='Geschlechtsangabe kontrollieren';
+							}
+						}
+					}else{
+						document.getElementById('alter').style.backgroundColor='red';
+						document.getElementById('ausgabe').innerHTML='Alterseingabe kontrollieren';
+					}
+				}
+			}else{
+				document.getElementById('alter').style.backgroundColor='red';
+				document.getElementById('ausgabe').innerHTML='Alterseingabe kontrollieren, keine ganze Zahl!';
+			}
+		}
+};
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<form id="formular" action="">
+		Alter:	<input type="text" id="alter"></input>
+		Geschlecht: <input type="text" id="geschlecht"></input>
+		<button type="button" id="send">senden</button>
+	</form>
+	<p id="ausgabe"></p>
+</body>
+</html>

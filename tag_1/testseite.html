@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+	<title>HTML&CSS Testseite</title>
+	<meta charset="utf-8">
+	<script>
+
+	</script>
+	<style>
+	body{
+		 box-sizing: border-box;
+	}
+	#wrapper{
+		width: 960px;
+	}
+	img #logo{
+
+	}
+
+	div #main_menu{
+		float:right;
+	}
+
+	#main_menu li{
+
+		display: inline-block;
+
+	}
+
+	#main_menu li a{
+		text-decoration: none;
+	}
+
+	div #wrapper_newsletter{
+		border-style:solid;
+		border-width:thin;
+	}
+
+	#wrapper_newsletter form{
+		float:right;
+
+
+	}
+
+
+	#content1, #content2, #content3{
+		float: left;
+		width: 30%;
+		margin-right: 20px;
+		border-style:solid;
+		border-width:thin;
+
+	}
+
+	.clear_float{
+		clear:both;
+	}
+
+#wrapper_newsletter::after {
+content:'';
+display:block;
+clear:both;
+
+}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+  <div id="wrapper_head">
+    <img id="logo" src="logo.png" alt="Logo" height="100" alt="Logo">
+		<div id="main_menu">
+    <ul>
+      <li><a href="">Home</a></li>
+      <li><a href="">About Us</a></li>
+      <li><a href="">Blog</a></li>
+      <li><a href="">Portfolio</a></li>
+      <li><a href="">Services</a></li>
+    </ul>
+	</div>
+		<div class="clear_float"></div>
+    <img id="slider" src="slider.jpeg">
+  </div>
+  <div id="wrapper_newsletter">
+		<p>Newsletter?</p>
+		<form action="" method=>
+			<input type="text" value="E-Mail-Adresse"></input>
+			<input type="submit"></input>
+		</form>
+		<!-- <div class="clear_float"></div> -->
+  </div>
+
+	<div id="wrapper_content">
+  <div id="content1">
+		<p>Inhalt 1</p>
+		<img src="liniendiagramm.gif" width=300>
+  </div>
+  <div id="content2">
+		<p>Inhalt 2</p>
+		<img src="balkendiagramm.jpg" width=300>
+  </div>
+  <div id="content3">
+		<p>Inhalt 3</p>
+  </div>
+</div>
+<div class="clear_float"></div>
+<div id="social_media">
+	<p>Social Icons</p>
+	<img src="fb_icon.png" alt="Facebook" height=30>
+	<img src="twitter_icon.jpg" alt="Twitter" height=30>
+</div>
+</div>
+</body>
+</html>

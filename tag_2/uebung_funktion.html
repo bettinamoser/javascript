@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+//Bessere Variante zum Deklarieren der Funktion
+//Geltungsbereich der Funktion kann man somit selbst bestimmen:
+    var tuwas = function(p1){
+
+      var test = function(){
+        
+      }
+
+      //p1 ist lokale Variable
+      var s = 3;
+
+      return s+p1;
+
+    }
+
+//diese Funktion ist nicht immer global:
+    function meineFunktion(){
+      document.getElementById('btn').onclick=function(){
+        tuwas();
+      }
+
+    }
+
+    window.onload = function(){
+        meineFunktion();
+    };
+
+    //andere Notation:
+    //window.onload = meineFunktion;
+
+    var x;
+    x=5;
+
+    y=6; //Variable ist global, da nicht selbst deklariert
+
+
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+</body>
+</html>

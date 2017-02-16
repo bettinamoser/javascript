@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+
+	window.onload = function(){
+		document.getElementById('sum').onclick=function(e){
+			e.preventDefault(); //Standardfunktionen aus HTML deaktivieren, Achtung Browserkompatibilität, zB Klick am Hyperlink, Formular submit
+
+			//Summenberechnung
+			//1. Variablendeklaration
+			var eingabe1, eingabe2, summe;
+
+			//2. Daten einlesen
+
+				eingabe1=document.getElementById('z1').value*1; //*1 um zu int zu konvertieren oder: /1, -0 oder parseInt-Funktion
+				eingabe2=document.getElementById('z2').value*1;
+
+				document.getElementById('formular').style.display='none';
+				document.getElementById('ausgabe').style.display='block';
+				if(isNaN(eingabe1)){ alert('Zahl1 ist keine Zahl!');}
+				if(!isNaN(eingabe1) && isFinite(eingabe2)){
+
+					summe=eingabe1+eingabe2;
+					//4. Ausgabe
+
+					document.getElementById('z1').value='';
+					document.getElementById('z2').value='';
+					document.getElementById('ausgabe').innerHTML = 'Die Summe ist <span id="ergebnis" style="color:red">' + summe + '</span>'; //besser bzw. schöner wäre es den span im html-code, und css-formatierung im css-teil anzugeben!
+					//document.getElementById('ergebnis').innerHTML=summe;
+
+				}else{
+					document.getElementById('ausgabe').innerHTML='!!FEHLER!!';
+
+				}
+
+			//3. Daten verarbeiten
+
+
+
+		}
+
+		document.getElementById('minus').onclick=function(e){
+			e.preventDefault(); //Standardfunktionen aus HTML deaktivieren, Achtung Browserkompatibilität, zB Klick am Hyperlink, Formular submit
+
+			//Summenberechnung
+			//1. Variablendeklaration
+			var eingabe1, eingabe2, ergebnis;
+
+			//2. Daten einlesen
+
+				eingabe1=document.getElementById('z1').value*1; //*1 um zu int zu konvertieren oder: /1, -0 oder parseInt-Funktion
+				eingabe2=document.getElementById('z2').value*1;
+			//3. Daten verarbeiten
+			ergebnis=eingabe1-eingabe2;
+
+			//4. Ausgabe
+			document.getElementById('z1').value='';
+			document.getElementById('z2').value='';
+			document.getElementById('ausgabe').innerHTML = 'Das Ergebnis ist <span style="color:red">' + ergebnis + '</span>';
+
+		}
+
+		document.getElementById('multiplikation').onclick=function(e){
+			e.preventDefault(); //Standardfunktionen aus HTML deaktivieren, Achtung Browserkompatibilität, zB Klick am Hyperlink, Formular submit
+
+			//Summenberechnung
+			//1. Variablendeklaration
+			var eingabe1, eingabe2, ergebnis;
+
+			//2. Daten einlesen
+
+				eingabe1=document.getElementById('z1').value*1; //*1 um zu int zu konvertieren oder: /1, -0 oder parseInt-Funktion
+				eingabe2=document.getElementById('z2').value*1;
+			//3. Daten verarbeiten
+			ergebnis=eingabe1*eingabe2;
+
+			//4. Ausgabe
+			document.getElementById('z1').value='';
+			document.getElementById('z2').value='';
+			document.getElementById('ausgabe').innerHTML = 'Das Ergebnis ist <span style="color:red">' + ergebnis + '</span>';
+
+		}
+
+		document.getElementById('division').onclick=function(e){
+			e.preventDefault(); //Standardfunktionen aus HTML deaktivieren, Achtung Browserkompatibilität, zB Klick am Hyperlink, Formular submit
+
+			//Summenberechnung
+			//1. Variablendeklaration
+			var eingabe1, eingabe2, ergebnis;
+
+			//2. Daten einlesen
+
+				eingabe1=document.getElementById('z1').value*1; //*1 um zu int zu konvertieren oder: /1, -0 oder parseInt-Funktion
+				eingabe2=document.getElementById('z2').value*1;
+			//3. Daten verarbeiten
+			ergebnis=eingabe1/eingabe2;
+
+			//4. Ausgabe
+			document.getElementById('z1').value='';
+			document.getElementById('z2').value='';
+			document.getElementById('ausgabe').innerHTML = 'Das Ergebnis ist <span style="color:red">' + ergebnis + '</span>';
+
+		}
+
+		document.getElementById('pot').onclick=function(e){
+			e.preventDefault(); //Standardfunktionen aus HTML deaktivieren, Achtung Browserkompatibilität, zB Klick am Hyperlink, Formular submit
+
+			//Summenberechnung
+			//1. Variablendeklaration
+			var eingabe1, eingabe2, ergebnis;
+
+			//2. Daten einlesen
+
+				eingabe1=document.getElementById('z1').value*1; //*1 um zu int zu konvertieren oder: /1, -0 oder parseInt-Funktion
+				eingabe2=document.getElementById('z2').value*1;
+			//3. Daten verarbeiten
+			ergebnis=Math.pow(eingabe1,eingabe2);
+
+			//4. Ausgabe
+			document.getElementById('z1').value='';
+			document.getElementById('z2').value='';
+			document.getElementById('ausgabe').innerHTML = 'Das Ergebnis ist <span style="color:red">' + ergebnis + '</span>';
+
+		}
+
+
+
+	document.getElementById('wurzel').onclick=function(e){
+		e.preventDefault(); //Standardfunktionen aus HTML deaktivieren, Achtung Browserkompatibilität, zB Klick am Hyperlink, Formular submit
+
+		//Summenberechnung
+		//1. Variablendeklaration
+		var eingabe1, eingabe2, ergebnis;
+
+		//2. Daten einlesen
+
+			eingabe1=document.getElementById('z1').value*1; //*1 um zu int zu konvertieren oder: /1, -0 oder parseInt-Funktion
+			eingabe2=document.getElementById('z2').value*1;
+		//3. Daten verarbeiten
+		ergebnis=eingabe1/eingabe2;
+
+		//4. Ausgabe
+		document.getElementById('z1').value='';
+		document.getElementById('z2').value='';
+		document.getElementById('ausgabe').innerHTML = 'Das Ergebnis ist <span style="color:red">' + ergebnis + '</span>';
+
+	}
+		};
+
+	//var zahl1;
+	//var x = 5, y, z, a, b=3;
+	//zahl1 = '1';
+
+	//ergebnis = 2 * 3; //von js deklarierte Variablen sind immer globale Variablen
+
+
+	/*
+		Integer = Number
+		Float = Number
+		String "abc" 'abc' = String
+		Boolean: true oder false
+		NaN => Not a Number
+		NaN ist die einzige Zahl, die mit sich selbst nicht gleich ist
+	*/
+
+	//alert(zahl1 + 2); //'1' + 2 => '12'
+	//alert(zahl1 * 1 + 2); // '1' * 1 => 1 + 2 => 3
+//Wert undefined: Variable deklariert aber nich initialisiert
+
+var x;
+//alert(x);
+
+if(x){}
+
+/*
+Operatoren: + - * / %
+Verkettungsoperator: +
+
+*/
+
+//ECMA6
+const pi = 3.14;
+
+	</script>
+	<style>
+
+	#ausgabe{
+		display:none;
+	}
+
+	</style>
+</head>
+<body>
+	<form id="formular" action="">
+Zahl1: <input id="z1" type="text"><br>
+Zahl2: <input id="z2" type="text"><br>
+<button type="button" id="minus">-</button>
+<button type="button" id="sum">+</button>
+<button type="button" id="multiplikation">*</button>
+<button type="button" id="division">/</button>
+<button type="button" id="pot">x^y</button>
+<button type="button" id="wurzel">wurzel</button>
+</form>
+
+<div id="ausgabe"></div>
+
+</body>
+</html>

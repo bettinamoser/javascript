@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="functions.js"></script>
+	<script>
+//Eventlistener zuweisen----------------------------------
+	window.onload = function(){
+		_e('euro').value='';
+		_e('usd').value='';
+		//document.getElementById('change').onclick = starteUmrechnung;
+		//_e('meinForm').onsubmit =starteUmrechnung;
+
+		document.getElementById('euro').onfocus=starteUmrechnung;
+
+	};
+
+
+
+//funktionen deklarieren---------------------------------------
+
+	var starteUmrechnung = function(e)	{
+		e.preventDefault();
+
+		var euro, usd, kurs;
+
+		kurs=1.0638;
+
+		euro=_e('euro').value;
+		euro=zahlEinlesen(euro);
+
+		usd=_e('usd').value;
+		usd=zahlEinlesen(usd);
+		if(isNaN(euro)){
+			_e('euro').className='error';
+		}else	if(euro>0){
+
+				_e('euro').className='';
+				usd= euro*kurs;
+				_e('usd').value=zahlAusgeben(usd);
+
+		}else if(isNaN(usd)){
+			_e('usd').className='error';
+			}else	if(usd>0){
+
+				_e('usd').className='';
+				eur= usd/kurs;
+				_e('euro').value=zahlAusgeben(eur);
+
+
+		}
+
+
+
+	}
+
+	</script>
+	<style>
+		.error{
+			background: red;
+			color:rgb(255,255,255);
+		}
+	</style>
+</head>
+<body>
+	<form action="?" id="meinForm">
+		<label>EUR</label> <input type="text" id="euro">	<label>USD</label><input type="text" id="usd">
+
+	</form>
+</body>
+</html>
