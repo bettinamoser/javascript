@@ -1,0 +1,200 @@
+<!--
+BMI Rechner
+User gibt Größe (in cm) und Gewicht (in kg) ein.
+Eingabefehler werden im UI angezeigt.
+Es wird BMI berechnet (zwei Kommastellen) und ausgegeben (BMI = kg/m2)
+In der Grafik bmi_tabelle.gif (siehe Ordner/ZIP) wird dem USer mit einem X angezeigt,
+wo er sich befindet.
+-->
+
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+
+
+	window.onload =function(){
+		document.getElementById('bmiForm').onsubmit = function(e){ starteBmiBerechnung(e);}
+
+	var starteBmiBerechnung = function(e){
+		e.preventDefault();
+
+			//console.log('starte BMI Berechnung');
+
+		//variablen deklarieren
+		let gewicht, groesse=0.0, bmi ;
+		let validInput = true;
+		let bmiZone = '';
+		let bmiColor = '';
+
+		//variablen Einlesen
+		gewicht = document.getElementById('kg').value *1;
+		groesse = document.getElementById('cm').value *1;
+		//console.log('Gewicht:' + gewicht + ' Größe:' + groesse);
+
+		//eingabeüberprüfung
+		if(isNaN(gewicht) || gewicht < 40 || gewicht >120 ){
+			document.getElementById('kg').className='error';
+
+			validInput=false;
+		} else{
+			document.getElementById('kg').className='';
+
+		}
+
+		if(isNaN(groesse) || groesse < 160 || groesse > 200){
+			document.getElementById('cm').className='error';
+
+			validInput=false;
+		} else{
+			document.getElementById('cm').className='';
+
+		}
+
+		if(validInput==false)
+		{
+			document.getElementById('bmi').value='Eingabe überprüfen';
+		}else{
+
+			//bmi berechnen
+			bmi=0.0;
+			bmi= berechneBmi(gewicht,groesse);
+			getCoordinates(gewicht,groesse);
+			//ausgabe
+			document.getElementById('bmi').value=bmi;
+
+		}
+
+
+		switch(true){
+			case bmi < 16:
+				bmiZone = 'Starkes Untergewicht';
+				bmiColor = 'purple';
+				break;
+			case bmi >= 16 && bmi <17:
+				bmiZone = 'Mäßiges Untergewicht';
+				bmiColor = 'blue';
+				break;
+			case bmi >= 17 && bmi <20:
+				bmiZone = 'Leichtes Untergewicht';
+				bmiColor = 'cyan';
+				break;
+			case bmi >= 20 && bmi <25:
+				bmiZone = 'Normalgewicht';
+				bmiColor = 'green';
+				break;
+			case bmi >= 25 && bmi <30:
+				bmiZone = 'Übergewicht';
+				bmiColor = 'yellow';
+				break;
+			case bmi >= 30 && bmi <35:
+				bmiZone = 'Adipositas Grad I';
+				bmiColor = 'orange';
+				break;
+			case bmi >= 35 && bmi <40:
+				bmiZone = 'Adipositas Grad II';
+				bmiColor = 'red';
+				break;
+			case bmi >= 40:
+				bmiZone = 'Adipositas Grad III';
+				bmiColor = 'dark red';
+				break;
+			default:
+				bmiZone= 'BMI Zone nicht definiert';
+
+		}
+		//console.log('BMI-Zone: '+bmiZone);
+		document.getElementById('bmiZone').value=bmiZone;
+		document.getElementById('bmiZone').style.backgroundColor=bmiColor;
+
+
+	}
+
+	var berechneBmi = function(kgBmi, cmBmi) {
+		let bodyMassIndex = 0.0;
+
+		//in m umwandeln...
+		cmBmi = cmBmi/100;
+		//console.log('Größe in Metern: '+cmBmi);
+
+		bodyMassIndex = kgBmi / (cmBmi*cmBmi);
+
+		bodyMassIndex = Math.round( bodyMassIndex * 100 ) / 100;  //auf 2 Kommastellen runden
+
+		return bodyMassIndex;
+
+	}
+
+	var getCoordinates = function(gewichtWert, groesseWert){
+		let x=56, y=240;
+
+
+		//pixelwerte für grafik ermitteln
+		y=y-(gewichtWert-40)*3;
+		x=x+(groesseWert-160)*10;
+
+		document.getElementById('kreuzerl').style.top=y+'px';
+		document.getElementById('kreuzerl').style.left=x+'px';
+
+
+
+
+		//console.log('x: '+x);
+		//console.log('y: '+y);
+
+	}
+
+
+
+		};
+
+
+
+	</script>
+	<style>
+
+	.error {
+		background-color: red;
+	}
+
+	#bmiGrafik{
+		position: relative;
+		margin-top: 5px;
+
+	}
+
+	#kreuzerl {
+		position: absolute;
+		top: 240px;
+		left: 56px;
+		/*-visibility: hidden;*/
+		color: red;
+	}
+
+	#bmiZone {
+
+	}
+
+	input {
+		margin-bottom: 5px;
+	}
+
+	</style>
+</head>
+<body>
+	<form id="bmiForm" action="?">
+		<label for="labelKg">Gewicht in kg: <input id="kg" type="text"></label>
+		<label for="labelCm">Größe in cm: <input id="cm" type="text"> </label><br>
+		<label for="labelBmi">BMI: <input id="bmi" type="text" disabled="disabled"></label>
+		<label for="labelZone">Zone <input id="bmiZone" type="text" disabled="disabled"></label>
+		<button id="berechnen">berechnen</button>
+	</form>
+<div id="bmiGrafik">
+	<img src="bmi_tabelle.gif" alt="Grafik BMI" width=496 height=301>
+	<div id="kreuzerl">x</div>
+</div>
+
+</body>
+</html>

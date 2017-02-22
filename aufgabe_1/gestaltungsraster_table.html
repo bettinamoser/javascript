@@ -1,0 +1,103 @@
+<!--
+Aufgabe 3) HTML & CSS üben/wiederholen
+Tabelle: https://www.w3schools.com/html/html_tables.asp
+Versuche einen Gestaltungsraster (zB https://media.kulturbanause.de/blog/2014/11/beitragsbild-140x140.png)
+mittels Tabellen und CSS und ohne Tabellen und CSS umzusetzen.
+Zusatz: Versuche den Raster responsive zu machen (Bildschirmbreite 320 - 1600)
+-->
+
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+	</script>
+	<style>
+
+	body{
+		box-sizing: border-box;
+	}
+div {
+	border:solid thin;
+}
+#mainTable{
+	margin: auto;
+width: 50%;
+}
+#tableHeader{
+	background-color: red;
+	height: 3em;
+
+}
+
+#tableMenu {
+	background-color: orange;
+	height: 2em;
+
+}
+
+	#tableContent1{
+
+		background-color: blue;
+
+		min-height: 10em;
+
+	}
+
+	#tableContent2{
+
+		background-color: green;
+
+		min-height: 10em;
+
+	}
+
+	#tableContent3{
+
+		background-color: magenta;
+
+		min-height: 10em;
+
+	}
+
+
+
+	#tableFooter {
+		background-color: yellow;
+
+
+	}
+
+
+
+
+
+	</style>
+</head>
+<body>
+	<table id="mainTable">
+		<tr>
+			<th colspan="3" id="tableHeader">header</th>
+		</tr>
+		<tr>
+			<td colspan="3" id="tableMenu">menu</td>
+		</tr>
+		<tr>
+			<td id="tableContent1">content1</td>
+			<td id="tableContent2">content2</td>
+			<td id="tableContent3">
+				<table>
+					<tr><td>content1</td></tr>
+						<tr><td>content2</td></tr>
+						<tr><td>content3</td></tr>
+					</table></td>
+		</tr>
+		<tr>
+			<td colspan="3" id="tableFooter">footer</td>
+		</tr>
+	</table>
+
+
+</body>
+</html>

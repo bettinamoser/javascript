@@ -1,0 +1,118 @@
+<!--
+Aufgabe 3) HTML & CSS üben/wiederholen
+Tabelle: https://www.w3schools.com/html/html_tables.asp
+Versuche einen Gestaltungsraster (zB https://media.kulturbanause.de/blog/2014/11/beitragsbild-140x140.png)
+mittels Tabellen und CSS und ohne Tabellen und CSS umzusetzen.
+Zusatz: Versuche den Raster responsive zu machen (Bildschirmbreite 320 - 1600)
+-->
+
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+	</script>
+	<style>
+
+	body{
+		box-sizing: border-box;
+	}
+div {
+	border:solid thin;
+}
+#wrapper{
+	margin: auto;
+width: 50%;
+}
+#head_wrapper{
+	background-color: red;
+
+}
+
+#menu_wrapper {
+	background-color: orange;
+	height: 2em;
+
+}
+
+	#content1{
+		float:left;
+		background-color: blue;
+		width: 33%;
+		min-height: 10em;
+
+	}
+
+	#content2{
+		float:left;
+		background-color: green;
+		width: 33.5%;
+		min-height: 10em;
+
+	}
+
+	#content3{
+		float:left;
+		background-color: magenta;
+		width: 33%;
+		min-height: 10em;
+
+	}
+
+	#content3_1, #content3_2, #content3_3{
+		background-color: rgba(255,255,255,0.5);
+
+	}
+
+	#footer_wrapper {
+		background-color: yellow;
+
+
+	}
+
+	.clearfix::after {
+	    content: "";
+	    clear: both;
+	    display: table;
+	}
+
+
+
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="head_wrapper">
+			<p>header</p>
+		</div> <!-- head_wrapper -->
+		<div id="menu_wrapper">
+			<p>menü</p>
+		</div> <!-- menu_wrapper -->
+		<div id="content_wrapper" class="clearfix">
+		<div id="content1">
+			<p>inhalt1</p>
+		</div> <!-- content1 -->
+		<div id="content2">
+			<p>inhalt2</p>
+		</div> <!-- content2 -->
+		<div id="content3">
+			<div id="content3_1">
+				<p>inhalt3.1</p>
+			</div> <!-- content3_1 -->
+			<div id="content3_2">
+				<p>inhalt3.2</p>
+			</div> <!-- content3_2 -->
+			<div id="content3_3">
+				<p>inhalt3.3</p>
+			</div> <!-- content3_3 -->
+		</div> <!-- content3 -->
+		</div> <!-- content_wrapper -->
+		<div id="footer_wrapper">
+			<p>footer</p>
+		</div> <!-- footer_wrapper -->
+	</div> <!-- wrapper -->
+
+
+</body>
+</html>
