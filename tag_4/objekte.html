@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+
+//arrays
+	var a = new Array();
+	var a2 = [];
+
+	var a3 = a;				//zeiger, keine kopie!!
+
+	a[0]='a';
+	a2[1]='b';
+	a3[2]='c';
+
+	console.log(a, a2, a3);
+
+//objects
+	var o1 = new Object();
+	var o2 = {};
+	var o = {
+		y:1,
+		z:'abc'
+	};
+	console.log(o1, o);
+
+	o.x= 3;
+
+	var a4 =[];
+	a4['x'] = 1;
+	a4['y'] = 2;
+	a4['z'] = 3;
+
+	console.log(o1, o, a4);
+	console.log(o.x, a4['x'], o['x'], a4.x);
+
+	var eigenschaft = 'x';
+
+	console.log(o.eigenschaft, o[eigenschaft]);
+
+	var o4 ={
+		a:[],
+		o:{
+			sub1:1
+		}
+	};
+
+	console.log(o4);
+
+	//JSON Javascript Object Notation
+	//vorteil: overhead ist aufs minimum reduziert, datenmenge klein halten
+	//objekte spreichern, aber keine methoden
+	//quasi ersatz zu xml, post
+	var o5 ={
+		"a":[],
+		"o":{
+			"sub1":1
+		}
+	};
+
+	var objektString = JSON.stringify(o5); //string aus objekt machen
+	console.log(objektString);
+
+	var o6 = JSON.parse('{"abc":1,"xyz":[1,2,3]}');
+	console.log(o6);
+
+
+	window.onload = function () {
+		var div = document.getElementById('x');
+		div.innerHTML = 'B';
+		var div2=div;
+
+		//mögliche Varianten Formulare anzusprechen
+		f=document.getElementById('formID'); //beste variante
+		f=document.forms[0];
+		f=document.forms['meinFormular'];
+		f=document.forms.meinFormular;
+		f=document.meinFormular;
+
+	}
+
+
+
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<div id="x">A</div>
+	<form name="meinFormular" id="formID"></form>
+</body>
+</html>

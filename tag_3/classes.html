@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="functions.js"></script>
+	<script>
+console.log(navigator.userAgent);
+
+var s = 'Wifi Wien'; //Objekt String
+
+if(navigator.userAgent.indexOf('Firefox')> -1) {alert('guter browser!');}
+
+var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+var isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1;
+var isIPhone = navigator.userAgent.toLowerCase().indexOf('iphone') > -1;
+
+if(isIPhone && isFirefox){alert('Wie geht das?');}
+
+
+
+	</script>
+	<style>
+
+
+	</style>
+</head>
+<body>
+
+
+</body>
+</html>

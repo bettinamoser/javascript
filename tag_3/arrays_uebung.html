@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="functions.js"></script>
+	<script>
+var showEl =function(id){_e(id).style.display='block';}
+var hideEl =function(id){_e(id).style.display='none';}
+
+window.onload = function() {
+	hideEl('aus');
+	document.forms[0].onsubmit = zahlSpeichern;
+
+	_e('tab_ein').onclick = function(){ showEl('ein'); hideEl('aus');};
+	_e('tab_aus').onclick = function(){
+		showEl('aus');
+		hideEl('ein');
+		zahlenTab();
+/*
+		for(let i=0;i<document.getElementsByClassName('delZahl').length;i++)
+		{
+			document.getElementById('del'+i).onclick = function(){
+			aZahlen.splice(i,1);
+			zahlenTab();
+		};
+	}*/
+	};
+
+
+
+}
+
+aZahlen = [];
+
+var zahlSpeichern=function(event){
+	event.preventDefault();
+	var eingabe, userZahl;
+	eingabe=_e('zahl').value;
+	userZahl = zahlEinlesen(eingabe);
+
+	if( isNaN(userZahl) || eingabe==''){
+		alert('keine zahl');
+	}else {
+		aZahlen.push(eingabe);
+	}
+
+	console.log(aZahlen);
+
+}
+
+
+
+
+
+var zahlenTab = function() {
+	//gib Zahlen aus Array in tab "aus" aus
+	var ausgabe ='', summe=0, max=0, min=0;
+
+	for(let i=0 ; i<aZahlen.length ; i++){
+		//ausgabe += aZahlen[i] + ' <span id="del'+i+'" class="delZahl">(X)</span><br>';
+		ausgabe += aZahlen[i] + ' <span onclick="loescheZahl('+i+')">(X)</span><br>';
+		summe += aZahlen[i]*1;
+		if(i==0)
+		{
+			min=aZahlen[i];
+			max=aZahlen[i];
+
+		}
+		if(aZahlen[i] > max) {max=aZahlen[i];}
+		if(aZahlen[i] < min) {min=aZahlen[i];}
+
+
+	}
+	ausgabe+= '_____________<br>Summe: ';
+	ausgabe+=summe;
+
+	ausgabe+= '<br>Minimum: '+min+"<br>Maximum: "+max;
+
+	_e('aus').innerHTML = ausgabe;
+
+}
+
+var loescheZahl = function(i){
+	aZahlen.splice(i,1);
+	zahlenTab();
+}
+
+
+
+
+
+
+	</script>
+	<style>
+#ein{
+
+}
+
+#aus{
+
+}
+
+	</style>
+</head>
+<body>
+	<ul>
+		<li id="tab_ein">Eingabe</li>
+		<li id="tab_aus">Ausgabe</li>
+	</ul>
+
+	<div id="ein">
+		<form>Zahl:<input type="text" id="zahl"><button>SAVE</buttom></form>
+	</div>
+	<div id="aus">
+		Zahlen, die der User eingegeben hat...
+	</div>
+
+</body>
+</html>

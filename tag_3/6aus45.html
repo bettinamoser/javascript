@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="functions.js"></script>
+	<script>
+
+	var anzLottoZahlen =0;
+	var lottoZahlen = []; //oder window.lottoZahlen
+
+
+window.onload = function (){
+	createTable3();
+}
+
+var createTable = function(){
+	var ausgabe='',i,j,z;
+	ausgabe += '<table border=1>';
+	for(i=1,z=0;i<=8;i++){
+		ausgabe+='<tr>';
+		for(j=1;j<=6;j++)
+		{
+			ausgabe+= '<td>';
+			if(++z <=45) ausgabe+=z;
+			//((i-1)*6 +j) <-- einfachere Variante ohne zusätzlicher Variable
+			ausgabe+='</td>';
+		}
+		ausgabe+='</tr>';
+	}
+	ausgabe += '</table>';
+
+	_e('ausgabe').innerHTML = ausgabe;
+}
+
+var createTable2 = function() {
+	var ausgabe='',i;
+	ausgabe += '<table border=1>';
+	for(i=1; i<=45; i++){
+		if(i%6==1) ausgabe+='<tr>';	//bei 1, 7, 13,... neue table row
+		ausgabe += '<td>'+i+'</td>';
+		if(i%6==0) ausgabe+='</tr>'; //bei 6,12,18,... table row ende
+	}
+	ausgabe += '</table>';
+
+	_e('ausgabe').innerHTML = ausgabe;
+
+}
+
+var createTable3 = function() {
+	var oTable, oTr, oTd;
+
+	//tabelle erstellen
+	oTable = document.createElement('table');
+	oTable.style.borderCollapse ='collapse';
+
+	//button erstellen
+	oButton = document.createElement('button');
+	oButton.innerHTML='Los geht\'s';
+	oButton.setAttribute('disabled', 'disabled');
+	oButton.onclick = function (){
+		//erst bei 6 zahlen
+		if(anzLottoZahlen <6 ) return;
+		alert('6 zahlen');
+		oButton.removeAttribute('disabled');
+
+	}
+
+	var aSpiel =[], i;
+	for(i=1;i<=6;i++){
+		aSpiel.push(zufallsZahl(1,45));
+	}
+	//tabelle befüllen
+
+	for(i=1;i<=45; i++)
+	{
+		if(i%6==1){
+			 oTr = document.createElement('tr');
+			 	oTable.appendChild(oTr);
+		 }
+		oTd = document.createElement('td');
+		oTd.setAttribute('data-i',i);
+		oTd.innerHTML = i;
+		oTd.i = i; //objekt kann mit beliebigen attributen erweitert werden, vorteil: es können nicht nur strings, sondern auch andere datentypen gespeichert werden(auch arrays)
+		oTd.style.cursor = 'Pointer';
+		oTd.onclick = function(){
+			if(lottoZahlen.length>5)
+			//if(anzLottoZahlen > 5)
+			{
+
+				alert('du hast schon 6 zahlen ausgewählt!');
+				return;
+			}else{
+			lottoZahlen.push(this.i);
+			//alert(this.getAttribute('data-i'));
+			alert(this.i);
+			this.className = 'selected';
+			this.style.background= 'red';
+			anzLottoZahlen ++;
+			}
+			console.log(lottoZahlen);
+
+			if(this.className == 'selected') return;
+
+		};
+
+		oTr.appendChild(oTd);
+
+
+
+	}
+
+
+
+
+	//oTd.innerHTML = 'Test';
+
+	oTable.setAttribute('border', '1');
+	//oTable.style.background ='#ddd';
+
+	//oTable = document.createElement('table'); //reihenfolge egal
+
+	_e('ausgabe').appendChild( oTable );
+	_e('ausgabe').appendChild ( oButton );
+
+
+}
+
+var zahlenAuswerten = function (){
+
+}
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+
+	<div id="ausgabe">
+
+	</div>
+</body>
+</html>

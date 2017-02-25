@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+
+	<script src="functions.js"></script>
+	<script>
+			//localStorage.clear();
+
+var aData = [];
+var speicher= localStorage.getItem('personen') || '';
+console.log( 'speicher',speicher );
+
+
+//aData.push(JSON.parse(localStorage.getItem('personen')));
+
+
+console.log( localStorage.getItem('anzahl') );
+
+var parsed = JSON.parse(localStorage.getItem('personen')) || []; //wenn nichts zurückkommt von json.parse(rückgabe false), dann mach ein leeres array
+console.log( 'personen',parsed );
+
+	window.onload = function() {
+		_e('geschlechtW').checked=false;
+		_e('geschlechtM').checked=false;
+
+
+var i, oOption;
+//erzeuge optionen für tage 1-31
+for(i=1;i<=31; i++){
+	oOption = document.createElement('option');
+	oOption.innerHTML = i;
+	oOption.value = i;
+	_e('tag').appendChild(oOption);
+}
+
+var monatsNamen = new Array('','Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember');
+//var monatsNamen = ['','Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+for(i=1;i<=12; i++){
+	oOption = document.createElement('option');
+	oOption.innerHTML = monatsNamen[i];
+	oOption.value = i;
+	_e('monat').appendChild(oOption);
+}
+
+for(i=2017;i>=1900; i--){
+	oOption = document.createElement('option');
+	oOption.innerHTML = i;
+	oOption.value = i;
+	_e('jahr').appendChild(oOption);
+}
+
+
+
+
+
+//eventlistener
+
+		_e('formEingabe').onsubmit = function(e) {
+			e.preventDefault();
+			var tag, monat, jahr, geschlecht='';
+			tag=_e('tag').value *1;
+			monat=_e('monat').options[_e('monat').selectedIndex].value *1;
+			jahr=_e('jahr').value *1;
+			console.log(tag,monat,jahr);
+
+
+			if(isNaN(tag)) _e('tag').style.color='red';
+			else _e('tag').style.color='black';
+
+			if(isNaN(monat)) _e('monat').style.color='red';
+			else _e('tag').style.color='black';
+
+			if(isNaN(jahr)) _e('jahr').style.color='red';
+			else _e('tag').style.color='black';
+
+			if(_e('geschlechtW').checked==true){
+				geschlecht=_e('geschlechtW').value;
+
+			}
+
+			if(_e('geschlechtM').checked==true){
+				geschlecht=_e('geschlechtM').value;
+			}
+
+			console.log(geschlecht);
+
+
+
+
+			if(isNaN(tag) || isNaN(monat) || isNaN(jahr) || geschlecht == ''){
+				console.log('eingabe prüfen');
+				return;
+			}
+
+			var date = new Date(jahr, monat-1, tag);
+
+			if(tag!= date.getDate())
+			{
+				alert('Datum gibt es nicht!');
+				return;
+			}
+
+			oPerson = {
+				"datum": date,
+				"datumString":tag+'.'+monatsNamen[monat]+' '+jahr,
+				"datumArray":[tag,monat,jahr],
+				"alter":0,
+				"geschlecht":geschlecht
+
+			};
+			//console.log(oPerson.datum);
+			//console.log(oPerson);
+
+			aData.push(oPerson);
+			alert('person gespeichert');
+			localStorage.setItem('anzahl',aData.length);
+
+			//var speicher = localStorage.getItem('personen')+JSON.stringify(oPerson);
+
+			speicher += JSON.stringify(oPerson);
+
+			localStorage.setItem('personen',speicher);
+
+
+
+			//localStorage.removeItem();
+			//localStorage.clear();
+
+
+			//console.log(aData);
+
+			//formularfelder zurücksetzen
+/*			_e('tag').selectedIndex='Tag';
+			_e('monat').selectedIndex='Monat';
+			_e('jahr').selectedIndex='Jahr';
+
+//weitere möglichkeiten zum zurücksetzen
+//			_e('tag').options[0].selected = true;
+//			_e('tag').value=''; //funktioniert nur wenn value im html-code so angegeben ist
+//			_e('tag').selectedIndex=0;
+
+			_e('geschlechtW').checked=false;
+			_e('geschlechtM').checked=false;*/
+
+			this.reset(); //formularfelder zurücksetzen - einfachere variante
+			printPersonen();
+
+	_e('delAll').onclick = function(e){
+		e.preventDefault();
+		localStorage.clear();
+		personen = [];
+		printPersonen();
+	}
+
+
+		};
+
+
+
+
+
+	}
+//erzeuge tabelle mit allen personen im id=ausgabe
+	var printPersonen = function() {
+		var oTable, oTr, oTd, i;
+		oTable = '<table id="meineTabelle"><tr><th>Geb. Datum</th><th>Alter</th><th>Geschlecht</th></tr></table>';
+		_e('ausgabe').innerHTML=oTable;
+		oTable =_e('meineTabelle');
+
+		for(i in aData){
+		//for(i=0;i<aData.length;i++){
+			oTr = document.createElement('tr');
+			oTable.appendChild(oTr);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML=aData[i].datumString;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			//oTd.innerHTML=aData[i].alter;
+			oTd.innerHTML='?';
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement('td');
+			oTd.innerHTML=aData[i].geschlecht;
+			oTr.appendChild(oTd);
+		}
+	}
+
+
+
+
+	</script>
+	<style>
+
+	table {
+		border-collapse: 'collapse';
+	}
+
+	tr:nth-child(2n+1) {background:#ddd;}
+
+
+	</style>
+</head>
+<body>
+	<div id="eingabe">
+		<form id="formEingabe">
+			Alter:
+			<select id="tag"><option>Tag</option></select>.
+			<select id="monat"><option>Monat</option></select>.
+			<select id="jahr"><option>Jahr</option></select><br>
+			Geschlecht: <input type="radio" name="geschlecht" id="geschlechtW" value="w" checked><label for="geschlechtW">Frau</label>
+			<input type="radio" name="geschlecht" id="geschlechtM" value="m"><label for="geschlechtM">Mann</label><br>
+			<button>speichern</button>
+		</form>
+
+		<button id="delAll">löschen</button>
+	</div>
+	<div id="ausgabe">
+	</div>
+</body>
+</html>

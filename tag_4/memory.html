@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script
+			  src="https://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script>
+	<script>
+
+
+
+	$(document).ready( function(){
+		var spielDiv = $('#spiel');
+		var karte, karte2;
+
+		for(i=0;i<=12;i++){
+
+		//karte = $(document.createElement('div'));
+		karteDiv= document.createElement('div');
+		karte= $(document.getElementById('spiel').appendChild(karteDiv));
+		karte.html(i);
+		 $(karte).addClass('verdeckt');
+		 spielDiv.append(karte);
+		 console.log(karte);
+	}
+
+	$( '.verdeckt' ).css({
+		'background-color':'#fcc',
+		'color':'#00c',
+		'font-size':'2em',
+		'position:':'absolute',
+		'width':'30px',
+		'min-height':'30px'
+	})
+
+/*	karte = $(document.createElement('div'));
+	karte.html('1');
+	 $(karte).addClass('verdeckt');
+
+	spielDiv.html(karte);
+
+	karte2 = $(document.createElement('div'));
+	karte2.html('2');
+	 $(karte2).addClass('verdeckt');
+
+	spielDiv.append(karte2);*/
+
+
+
+	});
+
+
+
+	</script>
+	<style>
+#spiel{
+	position: relative;
+}
+
+	</style>
+</head>
+<body>
+	<div id="spiel"></div>
+
+</body>
+</html>

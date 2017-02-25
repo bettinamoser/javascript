@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script>
+
+	var alleNamen= new Array('Anna','Josef','Tanja');
+
+	console.log(alleNamen[0]);
+
+	alleNamen[3]='Barbara';
+
+	alleNamen[7]='Andreas';
+
+	//alert(alleNamen);
+	var letzter= alleNamen.length-1;
+
+	console.log(alleNamen[letzter]); //Anzahl der Elemente des Array
+
+	alleNamen[alleNamen.length] = 'Oliver';
+
+	alleNamen.push('Shen'); //Element an letzer Stelle einfügen
+
+	console.log(alleNamen);
+
+	delete alleNamen[0];
+
+	console.log(alleNamen);
+	console.log(alleNamen.length);
+
+	alleNamen[0]=1;	//auch verschiedene Datentypen in einem Array sind möglich
+	alleNamen[4]= new Array('Alex','Vincenz');
+	console.log(alleNamen);
+	console.log(alleNamen.length);
+
+	console.log(alleNamen[4][0]);
+
+	alleNamen[5] = new Array();
+	alleNamen[5]['vorname']= 'Rene';
+	alleNamen[5]['nachname']='Krieger';
+	alleNamen[5][0]=1;
+
+	console.log(alleNamen[5]);
+
+console.log(alleNamen[5].length); //Elemente mit String als Bezeichnung werden nicht mitgezählt
+
+var teilnehmer = []; //kurzschreibweise, array literal
+
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+</body>
+</html>

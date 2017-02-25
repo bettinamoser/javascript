@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script
+			  src="https://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script>
+	<script>
+
+	//window.onload = function() {
+	$(document).ready( function(){
+
+	document.getElementById('absatz'); //liefert HTMLNodeElement
+	$('#absatz'); //liefert jQuery objekt
+
+	document.getElementById('absatz').innerHTML= "neuer Text";
+	$(' #absatz ').html('neuerer Text');
+
+	var oAbsatz = document.getElementById( 'absatz');
+	var jAbsatz = $( '#absatz' );
+
+	oAbsatz.innerHTML = 'schon wieder neu';
+	jAbsatz.html('nochmal neu');
+
+	var html = oAbsatz.innerHTML;
+	html = jAbsatz.html();	//wenn kein parameter mitgegeben wird, ist der inhalt der returnwert
+
+	jAbsatz =$( oAbsatz ); //html objekt umwandeln
+
+	oAbsatz= jAbsatz.get(0); //in jquery umwandeln, 0 heißt: gib das erste element zurück
+
+	jAbsatz.get(0).innerHTML = 'Alles beim Alten!';
+
+	$('p').html('alles gleich, haha ;)');
+	$('.absatz').css('background','#ccc');
+	$('p:nth-child(2n+1)').css('border-bottom','1px solid #000');
+
+	/*$('p:last-child').css('background-color','blue');
+	$('p:last-child').css('color','red');*/
+
+	$( 'p:last-child' ).css({				//p ist letztes element im dokument, nicht letztes p
+	//$( 'p:last' ).css({						//p ist letztes p im dokument, geht im css eigentlich nicht
+		'background-color':'#fcc', //oder backgroundColor:'#fcc'
+		'color':'#00c',						//oder color: '#00c'
+		'font-size':'2em' //oder fontSize:'2em'
+	})
+
+	$( 'p:not(#absatz)').css({ fontFamily:'Courier' }); //jedes p, das nicht die id absatz hat
+
+	console.log($('p+p').css('background-color')); //jedes p, das nach einem p kommt
+
+	$('p').addClass('neueKlasse');	//css klasse hinzufügen
+	$('p').removeClass('neueKlasse');	//css klasse entfernen
+	//toggleClass(); //füge klasse hinzu, wenn noch nicht vorhanden bzw. entferne klasse wenn vorhanden
+	//hasClass(); //klasse abfragen
+
+	$('button').click( function(e){
+		e.preventDefault();
+		var eingabe;
+		eingabe = $('input[type="text"]').val();
+
+		console.log(eingabe);
+		eingabe = $('input[type="text"]').focus();		//cursor wieder reinsetzen
+	});
+});
+
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<p class="absatz" id="absatz">Das ist ein Absatz</p>
+	<p class="absatz">Das ist ein weiterer Absatz</p>
+	<p>3. Absatz</p>
+
+	gib was ein:<input type="text"><button>Klick mich</button>
+
+</body>
+</html>
