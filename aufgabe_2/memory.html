@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script
+			  src="https://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script>
+	<script>
+
+	var voc = [
+    ['dog','Hund'],
+    ['cat','Katze'],
+    ['snake','Schlange'],
+    ['lion','Löwe'],
+    ['mouse','Maus'],
+    ['bug','Käfer'],
+    ['ant','Ameise'],
+    ['horse','Pferd'],
+    ['cow','Kuh'],
+    ['sheep','Schaf']
+  ];
+
+		var karte;
+
+	$(document).ready( function(){
+		var spielDiv = $('#spiel');
+
+		for(i=1;i<=(voc.length)*2;i++){
+
+
+				karteDiv= document.createElement('div');
+				karte= $(document.getElementById('spiel').appendChild(karteDiv));
+				karte.html(i);
+		 		$(karte).addClass('verdeckt');
+		 		$(karte).addClass('card');
+
+
+		 		spielDiv.append(karte);
+		 //console.log(karte);
+
+		 		karteZuweisen();
+
+		 		//$(karte).append('<br>i:'+$(karte).attr('data-index'));
+		 		//$(karte).append('<br>lang:'+$(karte).attr('data-lang'));
+
+
+
+		 karte.click( function(){
+
+
+
+			 if( $('.aufgedeckt').length >= 2 )
+			 {
+				 console.log('2 karten aufgedeckt');
+
+				 //alle karten zudecken
+
+				 $('.aufgedeckt').addClass('verdeckt');
+	 			 $('.aufgedeckt').removeClass('aufgedeckt');
+				 return;
+
+
+			 }
+
+
+			 $(this).addClass('aufgedeckt');
+			 $(this).removeClass('verdeckt');
+			 $(this).html(voc[$(this).attr('data-index')][$(this).attr('data-lang')]);
+
+			 if($('.aufgedeckt').length==1){
+
+				 console.log('karte 1: '+voc[$(this).attr('data-index')][$(this).attr('data-lang')]);
+				 return;
+				}
+
+				if($('.aufgedeckt').length==2){
+
+				  console.log('karte 2: '+voc[$(this).attr('data-index')][$(this).attr('data-lang')]);
+
+
+
+				if($('.aufgedeckt').eq(0).attr('data-index')==$('.aufgedeckt').eq(1).attr('data-index'))
+				{
+					console.log('Pärchen gefunden!');
+
+					$('.aufgedeckt').addClass('richtig');
+					$('.aufgedeckt').removeClass('aufgedeckt');
+
+					alert('anzahl richtige: '+$('.richtig').length);
+
+					if($('.richtig').length==(voc.length*2))
+					{
+						alert('Spiel ist zu Ende. Alle Karten sind aufgedeckt');
+					}
+
+
+				}else{
+
+					console.log('leider nein');
+				}
+			}
+
+		 });
+		}
+	});
+
+var karteZuweisen = function() {
+	var vocIndex, vocLang;
+
+
+//prüfen, ob attribute für karte schon erstellt wurden und neue zufallszahlen erstellen
+	do{
+
+			vocIndex = zufallsZahl(0,voc.length-1);
+			vocLang = zufallsZahl(0,1); //0 für englisch, 1 für deutsch
+
+			console.log('vocIndex '+vocIndex);
+			console.log('vocLang '+vocLang);
+
+
+
+		}while($('.card[data-index='+vocIndex+']').attr('data-index')==vocIndex && $('.card[data-index='+vocIndex+'][data-lang='+vocLang+']').attr('data-lang')==vocLang )
+//attribute für karten-divs erstellen
+		$(karte).attr('data-index',vocIndex);
+		$(karte).attr('data-lang',vocLang);
+
+	}
+
+
+	var zufallsZahl =function(von,bis){
+	  var zufall, anzahl;
+
+	  anzahl=bis-von+1;
+	  zufall= Math.floor(Math.random()*anzahl)+von;
+	  return zufall;
+
+	}
+
+
+
+	</script>
+	<style>
+#spiel{
+	position: relative;
+
+	width: 420px;
+}
+
+.verdeckt{
+
+	text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+	background-color: #99ccff;
+
+
+
+}
+
+.aufgedeckt{
+	background-color: #fff;
+
+}
+
+.richtig {
+	background-color: #eee;
+
+}
+
+.card{
+	font-family: Verdana, sans-serif;
+	text-align: center;
+	vertical-align: middle;
+	color: #aaa;
+	width: 70px;
+	height: 70px;
+	border: 3px solid #ccc;
+	margin: 10px 10px;
+	float: left;
+}
+
+	</style>
+</head>
+<body>
+	<div id="spiel"></div>
+
+</body>
+</html>

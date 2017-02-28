@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="functions.js"></script>
+	<script>
+
+
+	var lottoZahlen = [], gewinnZahlen = []; //oder window.lottoZahlen
+
+
+window.onload = function (){
+	createTable3();
+}
+
+
+var createTable3 = function() {
+	var oTable, oTr, oTd;
+
+	//tabelle erstellen
+	oTable = document.createElement('table');
+	oTable.style.borderCollapse ='collapse';
+
+	//button erstellen
+	oButton = document.createElement('button');
+	oButton.innerHTML='Los geht\'s';
+	oButton.setAttribute('disabled', 'disabled');
+	oButton.onclick = function (){
+
+		zahlenAuswerten();
+
+
+	}
+
+
+//gewinnzahlen erstellen
+
+	var i, zufall=null;
+	for(i=1;i<=6;i++){
+		zufall=zufallsZahl(1,45);
+		if(!gewinnZahlen.includes(zufall)) gewinnZahlen.push(zufall);
+		else i--;
+		//gewinnZahlen.push(i);
+	}
+
+
+//tabelle befüllen
+
+	for(i=1;i<=45; i++)
+	{
+		if(i%6==1){
+			 oTr = document.createElement('tr');
+			 	oTable.appendChild(oTr);
+		 }
+		oTd = document.createElement('td');
+
+		oTd.innerHTML = i;
+		oTd.i = i; //objekt kann mit beliebigen attributen erweitert werden, vorteil: es können nicht nur strings, sondern auch andere datentypen gespeichert werden(auch arrays)
+		oTd.style.cursor = 'Pointer';
+
+		oTd.onclick = function(){
+
+			if(lottoZahlen.includes(this.i)){
+				//alert('Zahl wurde schon ausgewählt!');
+				lottoZahlen.splice(lottoZahlen.indexOf(this.i),1);
+				this.className ='';
+				this.style.background = 'none';
+				console.log('zahl entfernt'+this.i);
+				console.log('zahlen ausgewählt: '+lottoZahlen.length);
+				if(oButton.disabled!='disabled') oButton.setAttribute('disabled', 'disabled');
+				return;
+			}
+
+			if(lottoZahlen.length>5)
+			//if(anzLottoZahlen > 5)
+			{
+				//alert('du hast schon 6 zahlen ausgewählt!');
+						oButton.removeAttribute('disabled');
+				return;
+			}else{
+
+			lottoZahlen.push(this.i);
+			console.log('zahl hinzugefügt:'+this.i);
+			this.className = 'selected';
+			this.style.background= 'red';
+
+			}
+
+			console.log(lottoZahlen);
+
+
+			if(this.className == 'selected') return;
+
+		};
+
+		oTr.appendChild(oTd);
+
+
+
+	}
+
+
+
+
+	//oTd.innerHTML = 'Test';
+
+	oTable.setAttribute('border', '1');
+	//oTable.style.background ='#ddd';
+
+	//oTable = document.createElement('table'); //reihenfolge egal
+
+	_e('ausgabe').appendChild( oTable );
+	_e('ausgabe').appendChild ( oButton );
+
+
+
+
+}
+
+
+//funktion zum ermitteln der gewinnzahlen
+
+var zahlenAuswerten = function (){
+	var richtigeZahlen =0;
+	var selectedTds=[];
+
+	selectedTds =document.getElementsByClassName('selected');
+	console.log('Gewinnzahlen:'+gewinnZahlen);
+
+	for(z in gewinnZahlen)
+	{
+		console.log('gewinnzahl: ',gewinnZahlen[z]);
+		if(lottoZahlen.includes(gewinnZahlen[z])){
+			//alert('richtige Zahl: '+gewinnZahlen[z] );
+			richtigeZahlen++;
+
+			for(x in selectedTds)
+			{
+				if(selectedTds[x].i == gewinnZahlen[z]){
+
+					selectedTds[x].style.backgroundColor='green';
+				}
+			}
+		}
+	}
+
+	console.log('anzahl treffer:',richtigeZahlen);
+
+	return richtigeZahlen;
+
+}
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+
+	<div id="ausgabe">
+
+	</div>
+</body>
+</html>

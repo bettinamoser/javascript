@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="functions.js"></script>
+	<script
+				src="https://code.jquery.com/jquery-3.1.1.min.js"
+				integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+				crossorigin="anonymous"></script>
+	<script>
+
+	var jTable, jTr, jTd, jButton;
+	var gewinnZahlen = [];
+
+	var i, zufall=null;
+	for(i=1;i<=6;i++){
+		zufall=zufallsZahl(1,45);
+		if(!gewinnZahlen.includes(zufall)) gewinnZahlen.push(zufall);
+		else i--;
+	}
+
+	console.log('gewinnzahlen: '+gewinnZahlen);
+
+	$(document).ready( function(){
+
+		/**************************************/
+		/******* tabelle erstellen ************/
+
+		jTable=$(document.createElement('table'));
+
+
+
+		/**************************************/
+		/******* button erstellen ************/
+		jButton=$(document.createElement('button'));
+		jButton.html('Los geht\'s!');
+		jButton.attr('disabled','disabled');
+
+		jButton.click(function() {
+			zahlenAuswerten();
+		});
+
+		var zahl=0;
+
+		/******* tablerows erstellen ************/
+		for(i=1;i<=45;i++)
+		{
+			if(i%6==1){
+				 jTr = $(document.createElement('tr'));
+				 	jTable.append(jTr);
+			 }
+			 jTd=$(document.createElement('td'));
+			 jTd.html(i);
+			 jTd.attr('data-i',i);
+
+
+			 /******* onclick Event erstellen ************/
+			 jTd.click( function(){
+
+
+			 if($('.selektiert').length > 5){
+				 jButton.removeAttr('disabled');		//Button aktivieren, wenn 6 Zahlen ausgewählt wurden
+
+
+			 }else{
+				  $(this).toggleClass('selektiert');
+				 jButton.attr('disabled', 'disabled'); //Button deaktivieren, wenn weniger als 6 Zahlen ausgewählt wurden
+			 }
+
+
+			 });
+
+
+			 jTr.append(jTd);
+
+		}
+
+
+
+
+
+		$( '#ausgabe' ).append(jTable);
+		$( '#ausgabe' ).append(jButton);
+
+
+		/******* tabelle formatieren ************/
+		jTable.css('border-collapse','collapse');
+		jTable.css('border','solid thin');
+		$('td').css('cursor','pointer');
+
+
+
+
+	})
+
+	var zahlenAuswerten = function() {
+			//var lottoZahlen=[];
+			//lottoZahlen=document.getElementsByClassName('selektiert');
+			var zahl=0;
+
+			for(i=0;$('.selektiert').get(i);i++){
+				zahl=$('.selektiert').get(i).innerHTML*1;
+				console.log('lottoZahlen: '+zahl);
+				if(gewinnZahlen.includes(zahl)){
+					console.log('gewonnen!! lottoZahl: '+zahl);
+
+					$( '[data-i = "'+zahl+'"').addClass('richtigeZahl');
+				}
+
+			}
+			/*
+			console.log('lottoZahlen: '+lottoZahlen);
+
+			for(z in gewinnZahlen)
+			{
+				if(lottoZahlen.includes(gewinnZahlen[z])){
+					$( '[data-i = "'+gewinnZahlen[z]+'"]' ).addClass('richtigeZahl');
+				}
+			}*/
+
+
+	}
+
+
+	</script>
+	<style>
+
+	.selektiert{
+		background: red;
+	}
+
+	.richtigeZahl{
+		background: green;
+	}
+	</style>
+</head>
+<body>
+
+	<div id="ausgabe">
+
+	</div>
+</body>
+</html>
